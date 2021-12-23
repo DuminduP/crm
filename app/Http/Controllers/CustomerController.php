@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
+use App\Http\Requests\StoreCustomerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
@@ -24,20 +25,13 @@ class CustomerController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCustomerRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'mobile' => ['required', 'string', 'max:25', 'min:8'],
-            'passport_number' => ['required'],
-        ]);
-
         $user = Customer::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -47,6 +41,50 @@ class CustomerController extends Controller
             'dob' => $request->dob,
         ]);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with('status', 'New Customer Created!');;
+    }
+
+    /**
+     * Display all customers
+     *
+     * @return \Illuminate\View\View
+     */
+    public function list()
+    {
+        $data['customers'] = Customer::all();
+        return view('dashboard', $data);
+    }
+
+    /**
+     * Display the customer edit view.
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $data['customer']  = Customer::findOrFail($id);
+        return view('new_customer', $data);
+    }
+
+    /**
+     * Update customer
+     * @param int $id
+     * @param  \App\Http\Requests\StoreCustomerRequest  $request
+     * @return \Illuminate\View\View
+     */
+    public function update($id, StoreCustomerRequest $request)
+    {
+        $customer  = Customer::findOrFail($id);
+
+        $user = $customer->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'passport_number' => $request->passport_number,
+            'passport_expiry' => $request->passport_expiry,
+            'dob' => $request->dob,
+        ]);
+
+        return redirect(RouteServiceProvider::HOME)->with('status', 'Customer updated!');;
     }
 }

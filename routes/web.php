@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,21 +12,25 @@ use App\Http\Controllers\CustomerController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [CustomerController::class, 'list'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::get('/new-customer', [CustomerController::class, 'create'])
-                ->middleware('auth')
-                ->name('new_customer');
-
+    ->middleware('auth')
+    ->name('new_customer');
 Route::post('/new-customer', [CustomerController::class, 'store'])
-                ->middleware('auth');
+    ->middleware('auth');
+Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
+    ->middleware('auth')
+    ->name('edit_customer');
+Route::post('/edit-customer/{id}', [CustomerController::class, 'update'])
+    ->middleware('auth');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
