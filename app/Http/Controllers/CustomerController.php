@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\StoreCustomerRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
 
 class CustomerController extends Controller
 {
@@ -19,7 +16,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('new_customer');
+        $data['customer']  = new Customer();
+        return view('new_customer', $data);
     }
 
     /**
