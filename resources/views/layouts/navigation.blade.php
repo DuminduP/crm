@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('new_customer')" :active="request()->routeIs('new_customer')">
+                        {{ __('New Customer') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -34,12 +37,15 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-responsive-nav-link :href="route('register')" >
+                            {{ __('New Staff') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('change_password')" >
+                            {{ __('Change Password') }}
+                        </x-responsive-nav-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-responsive-nav-link :href="route('change_password')" >
-                                {{ __('Change Password') }}
-                            </x-responsive-nav-link>
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
