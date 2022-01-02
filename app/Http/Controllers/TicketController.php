@@ -7,7 +7,7 @@ use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\StoreCustomerRequest;
 
-class CustomerController extends Controller
+class TicketController extends Controller
 {
     /**
      * Display the customer registration view.
@@ -17,7 +17,10 @@ class CustomerController extends Controller
     public function create()
     {
         $data['customer']  = new Customer();
-        return view('new_customer', $data);
+        $data['customers']  = Customer::pluck('name', 'id');
+        $data['airlines']  = ['UL' => 'UL', 'SQ' => 'SQ', 'QF' => 'QF', 'MH' => 'MH', 'TG' => 'TG', 'JQ' => 'JQ', 'VA' => 'VA'];
+        $data['selectedID'] = 1;
+        return view('new_ticket', $data);
     }
 
     /**

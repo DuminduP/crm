@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,13 @@ Route::get('/new-customer', [CustomerController::class, 'create'])
     ->name('new_customer');
 Route::post('/new-customer', [CustomerController::class, 'store'])
     ->middleware('auth');
+
+Route::get('/new-ticket', [TicketController::class, 'create'])
+    ->middleware('auth')
+    ->name('new_ticket');
+Route::post('/new-ticket', [TicketController::class, 'store'])
+    ->middleware('auth');
+
 Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
     ->middleware('auth')
     ->name('edit_customer');

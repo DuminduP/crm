@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('new_customer')" :active="request()->routeIs('new_customer')">
                         {{ __('New Customer') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('new_ticket')" :active="request()->routeIs('new_ticket')">
+                        {{ __('New Ticket') }}
+                    </x-nav-link>
                 </div>
             </div>
 
