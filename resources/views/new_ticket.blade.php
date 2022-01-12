@@ -5,7 +5,7 @@
             {{ __('Traveling Information') }}
         </h2>
     </x-slot>
-    
+
     <x-crm-card>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -17,10 +17,13 @@
             <div>
                 <x-label for="customer_id" :value="__('Customer Name')" />
 
-                <select name="customer_id" id="customer_id" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full" required>
-                    <option value="" >Please select</option>
-                    @foreach($customers as $id => $name)
-                        <option value="{{$id}}" title="{{$name}}" {{old('customer_id', 1) == $id ? 'selected' : ''}}>{{$name}}</option>
+                <select name="customer_id" id="customer_id"
+                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
+                    required>
+                    <option value="">Please select</option>
+                    @foreach ($customers as $id => $name)
+                        <option value="{{ $id }}" title="{{ $name }}"
+                            {{ old('customer_id', $ticket->customer_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -28,25 +31,26 @@
             <div class="mt-4">
                 <x-label for="from" :value="__('From')" />
 
-                <x-input id="from" class="block mt-1 w-full" type="text" name="from" :value="old('from')" required />
+                <x-input id="from" class="block mt-1 w-full" type="text" name="from" :value="old('from', $ticket->from)" required />
             </div>
             <!-- To -->
             <div class="mt-4">
                 <x-label for="to" :value="__('To')" />
 
-                <x-input id="to" class="block mt-1 w-full" type="text" name="to" :value="old('to')" required />
+                <x-input id="to" class="block mt-1 w-full" type="text" name="to" :value="old('to', $ticket->to)" required />
             </div>
 
-                        <!-- Air Line -->
-                        <div>
-                            <x-label for="airline" :value="__('Air Line')" />
-            
-                            <select name="airline" id="airline">
-                                @foreach($airlines as $id => $name)
-                                    <option value="{{$id}}" title="{{$name}}" {{old('airline', 1) == $id ? 'selected' : ''}}>{{$name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+            <!-- Air Line -->
+            <div class="mt-4">
+                <x-label for="airline" :value="__('Air Line')" />
+
+                <select name="airline" id="airline">
+                    @foreach ($airlines as $id => $name)
+                        <option value="{{ $id }}" title="{{ $name }}"
+                            {{ old('airline', $ticket->airline) == $id ? 'selected' : '' }}>{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
 
 
@@ -56,5 +60,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+        </x-auth-card>
+        </x-guest-layout>

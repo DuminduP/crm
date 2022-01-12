@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('new_ticket')" :active="request()->routeIs('new_ticket')">
                         {{ __('New Ticket') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('list_lickets')" :active="request()->routeIs('list_lickets')">
+                        {{ __('List Tickets') }}
+                    </x-nav-link>
                 </div>
             </div>
 

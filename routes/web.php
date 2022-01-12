@@ -25,18 +25,26 @@ Route::get('/new-customer', [CustomerController::class, 'create'])
     ->name('new_customer');
 Route::post('/new-customer', [CustomerController::class, 'store'])
     ->middleware('auth');
+Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
+    ->middleware('auth')
+    ->name('edit_customer');
+Route::post('/edit-customer/{id}', [CustomerController::class, 'update'])
+    ->middleware('auth');
 
 Route::get('/new-ticket', [TicketController::class, 'create'])
     ->middleware('auth')
     ->name('new_ticket');
 Route::post('/new-ticket', [TicketController::class, 'store'])
     ->middleware('auth');
-
-Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
+Route::get('/list-tickets', [TicketController::class, 'list'])
+    ->middleware(['auth'])
+    ->name('list_lickets');
+Route::get('/edit-ticket/{id}', [TicketController::class, 'edit'])
     ->middleware('auth')
-    ->name('edit_customer');
-Route::post('/edit-customer/{id}', [CustomerController::class, 'update'])
+    ->name('edit_ticket');
+Route::post('/edit-ticket/{id}', [TicketController::class, 'update'])
     ->middleware('auth');
+
 
 Route::get('/change-password', [ChangePasswordController::class, 'index'])
     ->middleware('auth')

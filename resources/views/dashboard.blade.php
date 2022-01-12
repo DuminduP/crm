@@ -39,6 +39,8 @@
 
 <script>
 $(document).ready( function () {
-    $('#dTable').DataTable();
+    $('#dTable').DataTable({
+        "order": [[ 0, "desc" ]]
+    });
 } );
 </script>

@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
                 $table->string('mobile');
                 $table->string('passport_number');
                 $table->date('passport_expiry')->nullable();
-                $table->date('dob')->nullable();;
+                $table->date('dob')->nullable();
                 $table->timestamps();
         });
     }

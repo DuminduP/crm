@@ -20,4 +20,12 @@ class Customer extends Model
         'dob',
     ];
 
+    /**
+     * Get the tickets 
+     */
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }
