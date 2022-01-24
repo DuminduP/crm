@@ -65,6 +65,17 @@ class CustomerController extends Controller
     }
 
     /**
+     * Display the customer detail view.
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function view(int $id)
+    {
+        $data['customer']  = Customer::findOrFail($id);
+        return view('view_customer', $data);
+    }
+
+    /**
      * Update customer
      * @param int $id
      * @param  \App\Http\Requests\StoreCustomerRequest  $request

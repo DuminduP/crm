@@ -30,6 +30,9 @@ Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
     ->name('edit_customer');
 Route::post('/edit-customer/{id}', [CustomerController::class, 'update'])
     ->middleware('auth');
+Route::get('/view-customer/{id}', [CustomerController::class, 'view'])
+    ->middleware('auth')
+    ->name('view_customer');
 
 Route::get('/new-ticket', [TicketController::class, 'create'])
     ->middleware('auth')

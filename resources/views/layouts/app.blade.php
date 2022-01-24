@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js')}}"></script>
+        <script src="https://kit.fontawesome.com/f65aa0b8c1.js" crossorigin="anonymous"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

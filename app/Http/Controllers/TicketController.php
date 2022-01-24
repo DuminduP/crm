@@ -9,6 +9,7 @@ use App\Http\Requests\StoreTicketRequest;
 
 class TicketController extends Controller
 {
+    private $airLines = ['UL' => 'UL', 'SQ' => 'SQ', 'QF' => 'QF', 'MH' => 'MH', 'TG' => 'TG', 'JQ' => 'JQ', 'VA' => 'VA'];
     /**
      * Display the customer registration view.
      *
@@ -16,9 +17,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $data['customer']  = new Customer();
+        $data['ticket']  = new Ticket();
         $data['customers']  = Customer::pluck('name', 'id');
-        $data['airlines']  = ['UL' => 'UL', 'SQ' => 'SQ', 'QF' => 'QF', 'MH' => 'MH', 'TG' => 'TG', 'JQ' => 'JQ', 'VA' => 'VA'];
+        $data['airlines']  = $this->airLines;
         $data['selectedID'] = 1;
         return view('new_ticket', $data);
     }
@@ -40,7 +41,7 @@ class TicketController extends Controller
             'airline' => $request->airline,
         ]);
 
-        return redirect()->route('dashboard')->with('status', 'Ticket information Added!');;
+        return redirect()->route('dashboard')->with('status', 'Ticket information added!');;
     }
 
     /**
@@ -63,7 +64,7 @@ class TicketController extends Controller
     {
         $data['ticket']  = Ticket::findOrFail($id);
         $data['customers']  = Customer::pluck('name', 'id');
-        $data['airlines']  = ['UL' => 'UL', 'SQ' => 'SQ', 'QF' => 'QF', 'MH' => 'MH', 'TG' => 'TG', 'JQ' => 'JQ', 'VA' => 'VA'];
+        $data['airlines']  = $this->airLines;
         return view('new_ticket', $data);
     }
 

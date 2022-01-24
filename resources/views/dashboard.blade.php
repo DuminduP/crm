@@ -24,9 +24,12 @@
                                 <td>{{$customer->id}}</td>
                                 <td>{{$customer->name}}</td>
                                 <td>{{$customer->passport_number}}</td>
-                                <td>{{$customer->mobile}}</td>
-                                <td>{{$customer->email}}</td>
-                                <td><a href="{{route('edit_customer',['id' => $customer->id] )}}">Edit</a></td>
+                                <td><a href="tel:{{$customer->mobile}}">{{$customer->mobile}}</a></td>
+                                <td><a href="mailto:{{$customer->email}}">{{$customer->email}}</a></td>
+                                <td>
+                                    <a href="{{route('edit_customer',['id' => $customer->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
+                                    <a href="{{route('view_customer',['id' => $customer->id] )}}" title="View"><i class="fas fa-eye"></i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
