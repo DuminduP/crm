@@ -23,7 +23,7 @@
                     <option value="">Please select</option>
                     @foreach ($customers as $id => $name)
                         <option value="{{ $id }}" title="{{ $name }}"
-                            {{ old('customer_id', $ticket->customer_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
+                            {{ old('customer_id', $ticket->customer_id) == $id || Request::get('customer_id') == $id  ? 'selected' : '' }}>{{ $name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,6 +50,20 @@
                             {{ old('airline', $ticket->airline) == $id ? 'selected' : '' }}>{{ $name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <!-- Status-->
+            <div class="mt-2">
+                <x-label for="status" :value="__('Status')" />
+
+                <select name="status" id="status">
+                    @foreach ($statuses as $name)
+                        <option value="{{ $name }}" title="{{ $name }}"
+                            {{ old('status', $ticket->status) == $name ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                        {{$ticket->status}}
+                        {{ $name }}
             </div>
 
 

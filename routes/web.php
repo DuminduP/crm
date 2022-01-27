@@ -39,9 +39,12 @@ Route::get('/new-ticket', [TicketController::class, 'create'])
     ->name('new_ticket');
 Route::post('/new-ticket', [TicketController::class, 'store'])
     ->middleware('auth');
-Route::get('/list-tickets', [TicketController::class, 'list'])
+Route::get('/list-all-tickets', [TicketController::class, 'listAll'])
     ->middleware(['auth'])
-    ->name('list_lickets');
+    ->name('list_all_tickets');
+Route::get('/list-pending-tickets', [TicketController::class, 'listPending'])
+    ->middleware(['auth'])
+    ->name('list_pending_tickets');
 Route::get('/edit-ticket/{id}', [TicketController::class, 'edit'])
     ->middleware('auth')
     ->name('edit_ticket');

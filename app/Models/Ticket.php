@@ -16,6 +16,7 @@ class Ticket extends Model
         'from',
         'to',
         'airline',
+        'status',
     ];
 
     /**

@@ -28,7 +28,8 @@
                                 <td><a href="mailto:{{$customer->email}}">{{$customer->email}}</a></td>
                                 <td>
                                     <a href="{{route('edit_customer',['id' => $customer->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
-                                    <a href="{{route('view_customer',['id' => $customer->id] )}}" title="View"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('view_customer',['id' => $customer->id] )}}" title="View"><i class="fas fa-eye"></i></a> &nbsp;
+                                    <a href="{{route('new_ticket',['customer_id' => $customer->id] )}}" title="Ticket"><i class="fa fa-ticket"></i></a>
                                 </td>
                             </tr>
                             @endforeach

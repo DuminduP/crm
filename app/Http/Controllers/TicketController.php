@@ -10,6 +10,7 @@ use App\Http\Requests\StoreTicketRequest;
 class TicketController extends Controller
 {
     private $airLines = ['UL' => 'UL', 'SQ' => 'SQ', 'QF' => 'QF', 'MH' => 'MH', 'TG' => 'TG', 'JQ' => 'JQ', 'VA' => 'VA'];
+    private $statuses = ['Pending', 'Done'];
     /**
      * Display the customer registration view.
      *
@@ -20,6 +21,7 @@ class TicketController extends Controller
         $data['ticket']  = new Ticket();
         $data['customers']  = Customer::pluck('name', 'id');
         $data['airlines']  = $this->airLines;
+        $data['statuses']  = $this->statuses;
         $data['selectedID'] = 1;
         return view('new_ticket', $data);
     }
@@ -39,6 +41,7 @@ class TicketController extends Controller
             'from' => $request->from,
             'to' => $request->to,
             'airline' => $request->airline,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('dashboard')->with('status', 'Ticket information added!');;
@@ -49,9 +52,20 @@ class TicketController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function list()
+    public function listAll()
     {
         $data['tickets'] = Ticket::all();
+        return view('list_tickets', $data);
+    }
+
+    /**
+     * Display pending tickets
+     *
+     * @return \Illuminate\View\View
+     */
+    public function listPending()
+    {
+        $data['tickets'] = Ticket::where('status', 'pending')->get();
         return view('list_tickets', $data);
     }
 
@@ -65,6 +79,7 @@ class TicketController extends Controller
         $data['ticket']  = Ticket::findOrFail($id);
         $data['customers']  = Customer::pluck('name', 'id');
         $data['airlines']  = $this->airLines;
+        $data['statuses']  = $this->statuses;
         return view('new_ticket', $data);
     }
 
@@ -83,6 +98,7 @@ class TicketController extends Controller
             'from' => $request->from,
             'to' => $request->to,
             'airline' => $request->airline,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('dashboard')->with('status', 'Ticket updated!');;
