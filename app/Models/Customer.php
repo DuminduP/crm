@@ -18,6 +18,7 @@ class Customer extends Model
         'passport_number',
         'passport_expiry',
         'dob',
+        'status',
     ];
 
     /**

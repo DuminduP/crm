@@ -25,6 +25,9 @@ Route::get('/new-customer', [CustomerController::class, 'create'])
     ->name('new_customer');
 Route::post('/new-customer', [CustomerController::class, 'store'])
     ->middleware('auth');
+Route::get('/all-customers', [CustomerController::class, 'all'])
+    ->middleware('auth')
+    ->name('all_customers');
 Route::get('/edit-customer/{id}', [CustomerController::class, 'edit'])
     ->middleware('auth')
     ->name('edit_customer');
@@ -33,6 +36,9 @@ Route::post('/edit-customer/{id}', [CustomerController::class, 'update'])
 Route::get('/view-customer/{id}', [CustomerController::class, 'view'])
     ->middleware('auth')
     ->name('view_customer');
+Route::get('/delete-customer/{id}', [CustomerController::class, 'delete'])
+    ->middleware('auth')
+    ->name('delete_customer');
 
 Route::get('/new-ticket', [TicketController::class, 'create'])
     ->middleware('auth')

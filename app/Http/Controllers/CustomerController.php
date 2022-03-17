@@ -9,6 +9,8 @@ use App\Http\Requests\StoreCustomerRequest;
 
 class CustomerController extends Controller
 {
+    private $statuses = ['Pending', 'Done'];
+
     /**
      * Display the customer registration view.
      *
@@ -17,6 +19,7 @@ class CustomerController extends Controller
     public function create()
     {
         $data['customer']  = new Customer();
+        $data['statuses']  = $this->statuses;
         return view('new_customer', $data);
     }
 
@@ -37,9 +40,21 @@ class CustomerController extends Controller
             'passport_number' => $request->passport_number,
             'passport_expiry' => $request->passport_expiry,
             'dob' => $request->dob,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('dashboard')->with('status', 'New Customer Created!');;
+    }
+
+    /**
+     * Display pending customers
+     *
+     * @return \Illuminate\View\View
+     */
+    public function list()
+    {
+        $data['customers'] = Customer::where('status', 'pending')->get();
+        return view('dashboard', $data);
     }
 
     /**
@@ -47,10 +62,10 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function list()
+    public function all()
     {
         $data['customers'] = Customer::all();
-        return view('dashboard', $data);
+        return view('all_customers', $data);
     }
 
     /**
@@ -61,6 +76,7 @@ class CustomerController extends Controller
     public function edit(int $id)
     {
         $data['customer']  = Customer::findOrFail($id);
+        $data['statuses']  = $this->statuses;
         return view('new_customer', $data);
     }
 
@@ -92,8 +108,20 @@ class CustomerController extends Controller
             'passport_number' => $request->passport_number,
             'passport_expiry' => $request->passport_expiry,
             'dob' => $request->dob,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('dashboard')->with('status', 'Customer updated!');;
+    }
+
+    /**
+     * Delete customer
+     * @param int $id
+     */
+    public function delete($id)
+    {
+        $customer  = Customer::findOrFail($id)->delete();
+
+        return redirect()->route('dashboard')->with('status', 'Customer Deleted!');;
     }
 }

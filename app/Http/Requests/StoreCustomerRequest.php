@@ -28,7 +28,6 @@ class StoreCustomerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'mobile' => 'required|string|max:25|min:8',
-            'passport_number' => 'required',
         ];
     }
 }

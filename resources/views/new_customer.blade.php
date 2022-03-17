@@ -40,7 +40,7 @@
                 <x-input id="passport_number" class="block mt-1 w-full"
                                 type="text"
                                 name="passport_number" :value="old('passport_number', $customer->passport_number)" 
-                                required />
+                                 />
             </div>
             <!-- passport_expiry -->
             <div class="mt-4">
@@ -59,6 +59,19 @@
                                 type="date"
                                 name="dob" :value="old('dob', $customer->dob)" 
                                  />
+            </div>
+
+            
+            <!-- Status-->
+            <div class="mt-2">
+                <x-label for="status" :value="__('Status')" />
+
+                <select name="status" id="status">
+                    @foreach ($statuses as $name)
+                        <option value="{{ $name }}" title="{{ $name }}"
+                            {{ old('status', $customer->status) == $name ? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
+                        </select>
             </div>
 
 

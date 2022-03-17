@@ -62,8 +62,6 @@
                             {{ old('status', $ticket->status) == $name ? 'selected' : '' }}>{{ $name }}</option>
                             @endforeach
                         </select>
-                        {{$ticket->status}}
-                        {{ $name }}
             </div>
 
 
